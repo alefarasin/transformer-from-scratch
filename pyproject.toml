@@ -10,6 +10,8 @@ python = "^3.11"
 torch = {version = "^2.1.2+cu121", source = "pytorch"}
 torchvision = {version = "^0.16.2+cu121", source = "pytorch"}
 torchaudio = {version = "^2.1.2+cu121", source = "pytorch"}
+transformers = "^4.36.2"
+datasets = "^2.16.1"
 
 
 [[tool.poetry.source]]
