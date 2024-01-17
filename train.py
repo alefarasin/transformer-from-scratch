@@ -32,7 +32,7 @@ def get_or_build_tokenizer(config, ds, lang):
         tokenizer = Tokenizer(WordLevel(unk_token='[UNK]'))
         tokenizer.pre_tokenizer = Whitespace()
         trainer = WordLevelTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]'], min_frequency=2)
-        tokenizer.train_from_iteration(get_all_sentences(ds, lang), trainer=trainer)
+        tokenizer.train_from_iterator(get_all_sentences(ds, lang), trainer=trainer)
         tokenizer.save(str(tokenizer_path))
     else:
         tokenizer = Tokenizer.from_file(str(tokenizer_path))
@@ -101,7 +101,7 @@ def train_model(config):
 
     loss_fn = nn.CrossEntropyLoss(ignore_index=tokenizer_src.token_to_id('[PAD]'), label_smoothing=0.1).to(device)
 
-    for epoch in range(initial_epoch, config['num_Epochs']):
+    for epoch in range(initial_epoch, config['num_epochs']):
         model.train()
         batch_iterator = tqdm(train_dataloader, desc=f'Processing epoch {epoch:02d}')
         for batch in batch_iterator:
@@ -126,7 +126,7 @@ def train_model(config):
             writer.flush()
 
             # Backpropagate the loss
-            loss.backwarad()
+            loss.backward()
 
             # Update the weights
             optimizer.step()
