@@ -13,6 +13,7 @@ torchaudio = {version = "^2.1.2+cu121", source = "pytorch"}
 transformers = "^4.36.2"
 datasets = "^2.16.1"
 tensorboard = "^2.15.1"
+torch-tb-profiler = "^0.4.3"
 
 
 [[tool.poetry.source]]
